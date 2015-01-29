@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'sessions/new'
+
   get 'users/new'
 
   #get 'sessions/new'
@@ -10,9 +12,9 @@ Rails.application.routes.draw do
   
   get 'signup'  => 'users#new'
 
-  #get    'login'   => 'sessions#new'
-  #post   'login'   => 'sessions#create'
-  #delete 'logout'  => 'sessions#destroy'
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
 
   #resources :users
   #resources :users do
@@ -21,8 +23,7 @@ Rails.application.routes.draw do
     #end
   #end
 
-
-  
+  resources :users
   #resources :microposts,          only: [:create, :destroy]
 
   #esources :relationships,       only: [:create, :destroy]

@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
+	has_many :entries, dependent: :destroy
 
 	attr_accessor :remember_token
 
-	before_save { self.email = email.downcase }
+	before_save :downcase_email
 
 	validates :name,  presence: true, length: { maximum: 50 }
 
@@ -42,5 +43,20 @@ class User < ActiveRecord::Base
   	def forget
     	update_attribute(:remember_digest, nil)
   	end
+
+  	# Defines a proto-feed.
+  	# See "Following users" for the full implementation.
+  	def feed
+    	Entry.where("user_id = ?", id)
+  	end
+
+
+	private
+
+    # Converts email to all lower-case.
+    def downcase_email
+      self.email = email.downcase
+    end
+
 
 end

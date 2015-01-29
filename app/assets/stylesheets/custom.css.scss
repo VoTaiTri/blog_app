@@ -263,6 +263,7 @@ input {
   .user {
     margin-top: 5em;
     padding-top: 0;
+    font-size: 12px;
   }
   .content {
     display: block;
@@ -276,6 +277,7 @@ input {
     color: $gray-light;
     display: block;
     margin-left: 60px;
+    font-size: 10px;
   }
   .gravatar {
     float: left;
@@ -296,4 +298,9 @@ span.picture {
   input {
     border: 0;
   }
+}
+
+.title{
+  font-size: 20px;
+  font-weight: bold;
 }

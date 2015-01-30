@@ -1,0 +1,6 @@
+<% if @comm_items.any? %>
+  <ol class="entries">
+    <%= render @comm_items %>
+  </ol>
+  <%= will_paginate @comm_items %>
+<% end %>

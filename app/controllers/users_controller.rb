@@ -7,7 +7,6 @@ class UsersController < ApplicationController
     	@user = User.find(params[:id])
       @entry  = current_user.entries.build
     	@entries = @user.entries.paginate(page: params[:page])
-
   	end
 
   	def new

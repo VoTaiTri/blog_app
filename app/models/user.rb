@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
 	has_many :entries, dependent: :destroy
+
+  has_many :comments, dependent: :destroy
+  
+
   has_many :active_relationships,  class_name:  "Relationship",
                                    foreign_key: "follower_id",
                                    dependent:   :destroy
@@ -60,6 +64,11 @@ class User < ActiveRecord::Base
       #Entry.where("user_id IN (:following_ids) OR user_id = :user_id",following_ids: following_ids, user_id: id)
   	  following_ids = "SELECT followed_id FROM relationships
                      WHERE  follower_id = :user_id"
+      Entry.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
+    end
+
+    def feed_all
       Entry.where("user_id IN (#{following_ids})
                      OR user_id = :user_id", user_id: id)
     end

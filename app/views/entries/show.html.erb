@@ -1,14 +1,51 @@
+ <div class="row">
+      <aside class="col-md-4">
+          <% if logged_in? %>
+          <section class="user_info">
+            <%= render 'shared/user_info' %>
+          </section>
+          <% end %>
+      </aside>
+
+      <div class="col-md-8">
+        <h3>Entry :</h3>
+        
+        <span class="title"><%= puts @entry.title %></span>
+          <span class="content">
+          <%= @entry.content %>
+          
+        </span>
+        <span class="user"><%= link_to @entry.user.name, @entry.user %></span>
+        <span class="timestamp">
+        Posted <%= time_ago_in_words(@entry.created_at) %> ago.
+        </span>
+      </div>
+        
 
 
-<li id="@entry-<%= @entry.id %>">
-    <%= link_to gravatar_for(@entry.user, size: 50), @entry.user %>
-    <span class="title"><%= puts @entry.title %></span>
-    <span class="content">
-      <%= @entry.content %>
-      <%= image_tag @entry.picture.url if @entry.picture? %>
-    </span>
-    <span class="user"><%= link_to @entry.user.name, @entry.user %></span>
-    <span class="timestamp">
-      Posted <%= time_ago_in_words(@entry.created_at) %> ago.
-    </span>
-</li>
+</div>
+
+        <div class="row">
+
+      <div class="col-md-6"></div>
+      <div class="col-md-6">
+<% if @entry.comments.any? %>
+        <h4>comments (<%= @entry.comments.count %>)</h3>
+        <ol class="comments">
+        <%= render @comments %>
+        </ol>
+        <%= will_paginate @comments %>
+      <% end %>
+      </div>
+    </div>
+      <% if logged_in? %>
+<div class="row">
+
+      <div class="col-md-6"></div>
+      <div class="col-md-6">
+          <section class="comment_form">
+            <%= render 'shared/comment_form' %>
+          </section>
+      </div>
+    </div>
+<% end %>

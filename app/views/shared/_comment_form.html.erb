@@ -1,0 +1,13 @@
+
+<%= form_for(@comment,html: { multipart: true }) do |f| %>
+  	<%= render 'shared/error_messages', object: f.object %>
+  	
+  	<div class="field">
+		<% @comment.user_id = current_user.id %>
+  		<%= hidden_field(:comment, :user_id)%>
+  		<%= hidden_field(:comment, :entry_id)%>
+	    <%= f.text_area(:content, placeholder: "Compose new comment") %>
+  	</div>
+
+  	<%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>

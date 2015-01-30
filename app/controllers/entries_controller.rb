@@ -1,9 +1,12 @@
 class EntriesController < ApplicationController
 	before_action :logged_in_user, only: [:create, :destroy]
-	before_action :correct_user,   only: :destroy
+	#before_action :correct_entry,   only: :destroy
 
 	def show
-    	@entry = Entry.find(params[:id])
+		    @entry = Entry.find(params[:id])
+		    @comments = @entry.comments.paginate(page: params[:page])
+	  	
+		    @comment = @entry.comments.build if logged_in?	
   	end
 
   	def create
@@ -25,17 +28,13 @@ class EntriesController < ApplicationController
 
 
   	private
-  	def user_params
-      	params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+  	
+	def entry_params
+      	params.require(:entry).permit(:content, :title)
     end
 
-	    def entry_params
-	      	params.require(:entry).permit(:title, :content, :picture)
-	    end
-
-	    def correct_user
-	      	@entry = current_user.entries.find_by(id: params[:id])
-      		redirect_to root_url if @entry.nil?
-    	end
+	def correct_user
+	    @entry = current_user.entries.find_by(id: params[:id])
+      	redirect_to root_url if @entry.nil?
+    end
 end

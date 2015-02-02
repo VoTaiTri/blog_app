@@ -287,10 +287,13 @@ input {
 }
 
 aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
+  #entry_title{
+    height: 40px;
   }
+  #entry_content{
+    height: 100px;
+  }
+  margin-bottom: 5px;
 }
 
 span.picture {
@@ -304,6 +307,8 @@ span.picture {
   font-size: 20px;
   font-weight: bold;
 }
+
+
 
 
 /******************* comments ******************/

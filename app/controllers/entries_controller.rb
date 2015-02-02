@@ -1,9 +1,11 @@
 class EntriesController < ApplicationController
 	before_action :logged_in_user, only: [:create, :destroy]
-	#before_action :correct_entry,   only: :destroy
+	before_action :correct_user,   only: :destroy
 
 	def show
 		    @entry = Entry.find(params[:id])
+		    @user_id = @entry.user_id
+		    @user = User.find_by(@user_id)
 		    @comments = @entry.comments.paginate(page: params[:page])
 	  	
 		    @comment = @entry.comments.build if logged_in?	

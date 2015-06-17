@@ -1,0 +1,39 @@
+<h2>Import</h2>
+
+<%= form_for @import_cource do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="row">
+    <div class="field col-md-3">
+      <%= label_tag "File" %>
+      <%= f.file_field :file, {class: "form-control", required: "required"} %>
+    </div>
+    <div class="buttons col-md-1">
+      <%= label_tag "" %>
+      <%= f.submit "Import", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<h2>Users</h2>
+<% if @courses.any? %> 
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>ID</th>
+      <th>ClassID</th>
+      <th>Note</th>
+      <th>Enroll</th>
+      <th>Timetable</th>
+    </tr>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.id %></td>
+        <td><%= course.courseID %></td>
+        <td><%= course.note %></td>
+        <td><%= course.enroll %></td>
+        <td><%= course.timetable %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  Empty
+<% end %>

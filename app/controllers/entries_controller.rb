@@ -8,7 +8,7 @@ class EntriesController < ApplicationController
 		    @user = User.find_by(@user_id)
 		    @comments = @entry.comments.paginate(page: params[:page])
 	  	
-		    @comment = @entry.comments.build if logged_in?	
+		    @comment = @entry.comments.build if logged_in?
   	end
 
   	def create

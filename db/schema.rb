@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129083713) do
+ActiveRecord::Schema.define(version: 20150612135053) do
+
+  create_table "books", force: :cascade do |t|
+    t.string   "name"
+    t.string   "author"
+    t.string   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -24,6 +32,22 @@ ActiveRecord::Schema.define(version: 20150129083713) do
   add_index "comments", ["entry_id"], name: "index_comments_on_entry_id"
   add_index "comments", ["user_id", "entry_id", "created_at"], name: "index_comments_on_user_id_and_entry_id_and_created_at"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "courses", force: :cascade do |t|
+    t.integer  "courseID"
+    t.integer  "enroll"
+    t.integer  "max_enroll"
+    t.string   "term"
+    t.string   "state"
+    t.text     "note"
+    t.string   "timetable"
+    t.string   "division_state", default: "spending"
+    t.integer  "subject_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "courses", ["subject_id"], name: "index_courses_on_subject_id"
 
   create_table "entries", force: :cascade do |t|
     t.string   "title"
@@ -47,6 +71,19 @@ ActiveRecord::Schema.define(version: 20150129083713) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+
+  create_table "subjects", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "tc"
+    t.integer  "lt",         default: 0
+    t.integer  "bt",         default: 0
+    t.string   "subjectID"
+    t.string   "species",    default: "normal"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "subjects", ["subjectID"], name: "index_subjects_on_subjectID"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

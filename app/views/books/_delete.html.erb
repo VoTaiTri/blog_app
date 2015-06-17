@@ -1,0 +1,11 @@
+<div class="modal-header">
+  <h3>Delete Book</h3>
+</div>
+<div class="modal-body">
+<ul class="errors"></ul>
+Are you sure you wish to delete <b><%= @book.content %></b>?
+</div>
+<div class="modal-footer">
+  <%= link_to "Yes, Delete This Book", book_path(@book), method: :delete, remote: true, class: "btn btn-danger" %>
+  <%= link_to "No, Please Don't", "#", class: "btn", data: { dismiss: "modal" } %>
+</div>

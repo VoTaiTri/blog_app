@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
 	def create
 		#@entry = Entry.find(params[:id])
 		#@comment = @entry.comments.build(comment_params)
+    byebug
 		@commnent = Comment.new(comment_params)
     	if @commnent.save
       		flash[:success] = "Comment created!"
